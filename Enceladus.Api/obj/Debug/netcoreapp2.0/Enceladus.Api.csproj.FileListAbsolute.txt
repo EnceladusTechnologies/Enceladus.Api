@@ -1,0 +1,11 @@
+C:\Users\james\Documents\Visual Studio 2017\Projects\Enceladus.Api\Enceladus.Api\bin\Debug\netcoreapp2.0\Enceladus.Api.deps.json
+C:\Users\james\Documents\Visual Studio 2017\Projects\Enceladus.Api\Enceladus.Api\bin\Debug\netcoreapp2.0\Enceladus.Api.runtimeconfig.json
+C:\Users\james\Documents\Visual Studio 2017\Projects\Enceladus.Api\Enceladus.Api\bin\Debug\netcoreapp2.0\Enceladus.Api.runtimeconfig.dev.json
+C:\Users\james\Documents\Visual Studio 2017\Projects\Enceladus.Api\Enceladus.Api\bin\Debug\netcoreapp2.0\Enceladus.Api.dll
+C:\Users\james\Documents\Visual Studio 2017\Projects\Enceladus.Api\Enceladus.Api\obj\Debug\netcoreapp2.0\Enceladus.Api.csprojResolveAssemblyReference.cache
+C:\Users\james\Documents\Visual Studio 2017\Projects\Enceladus.Api\Enceladus.Api\obj\Debug\netcoreapp2.0\Enceladus.Api.csproj.CoreCompileInputs.cache
+C:\Users\james\Documents\Visual Studio 2017\Projects\Enceladus.Api\Enceladus.Api\obj\Debug\netcoreapp2.0\Enceladus.Api.AssemblyInfoInputs.cache
+C:\Users\james\Documents\Visual Studio 2017\Projects\Enceladus.Api\Enceladus.Api\obj\Debug\netcoreapp2.0\Enceladus.Api.AssemblyInfo.cs
+C:\Users\james\Documents\Visual Studio 2017\Projects\Enceladus.Api\Enceladus.Api\bin\Debug\netcoreapp2.0\Enceladus.Api.pdb
+C:\Users\james\Documents\Visual Studio 2017\Projects\Enceladus.Api\Enceladus.Api\obj\Debug\netcoreapp2.0\Enceladus.Api.dll
+C:\Users\james\Documents\Visual Studio 2017\Projects\Enceladus.Api\Enceladus.Api\obj\Debug\netcoreapp2.0\Enceladus.Api.pdb

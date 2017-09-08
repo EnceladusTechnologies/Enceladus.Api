@@ -1,0 +1,38 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:35210/",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Development": {
+      "commandName": "IISExpress",
+      "launchUrl": "index.html",
+      "environmentVariables": {
+        "AUTH0_DOMAIN": "https://enceladus-dev.auth0.com",
+        "AUTH0_CLIENT_ID": "mD1dWLBEa2IthBS4ypQcyQ8qNzq2u4qn",
+        "AUTH0_CLIENT_SECRET": "UFSMMehdYfyzAzRBmPfI-c_s4QxhlIy3g2KdLcBTV8KXDWW9TlDctMLWNz4JFTte",
+        "SQLAZURECONNSTR_ENCELADUS_CONNECTION_STRING": "Server=tcp:boothbooks-dev.database.windows.net,1433;Initial Catalog=enceladus;Persist Security Info=False;User ID=bbAdmin;Password=conFusem3;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Enceladus.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:35211/"
+    }
+  }
+}
