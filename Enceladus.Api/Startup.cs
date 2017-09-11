@@ -21,12 +21,12 @@ namespace Enceladus.Api
         public Startup(IHostingEnvironment env)
         {
             EnvName = env.EnvironmentName;
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(env.ContentRootPath)
-                    .AddJsonFile($"appsettings.json", optional: false, reloadOnChange: true)
-                    .AddEnvironmentVariables();
-                Configuration = builder.Build();
-                localContextLockObj = new object();
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile($"appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+            localContextLockObj = new object();
         }
         public void ConfigureServices(IServiceCollection services)
         {
@@ -40,7 +40,7 @@ namespace Enceladus.Api
                 services.AddMvc(options =>
                 {
 
-                   //options.Filters.Add(typeof(RequireHttpsAttribute));
+                    //options.Filters.Add(typeof(RequireHttpsAttribute));
 
                 })
                 .AddJsonOptions(opt =>
@@ -70,18 +70,18 @@ namespace Enceladus.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-                try
+            try
+            {
+                app.UseCors(policy =>
                 {
-                    app.UseCors(policy =>
-                    {
-                        policy.AllowAnyOrigin();
-                        policy.AllowAnyHeader();
-                        policy.AllowAnyMethod();
-                    });
+                    policy.AllowAnyOrigin();
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                });
 
+                app.UseStaticFiles();
 
-
-                    JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+                JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
                 /* app.UseJwtBearerAuthentication(new JwtBearerOptions()
                 {
                     Audience = Startup.Configuration["AUTH0_CLIENT_ID"],
@@ -112,11 +112,11 @@ namespace Enceladus.Api
                 app.UseAuthentication();
 
                 app.UseMvc();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
         }
     }
