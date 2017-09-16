@@ -1,10 +1,9 @@
-﻿using Enceladus.Api.Models;
+﻿using Enceladus.Api.Helpers;
+using Enceladus.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace Enceladus.Api.Data.EnceladusRepository
 {
