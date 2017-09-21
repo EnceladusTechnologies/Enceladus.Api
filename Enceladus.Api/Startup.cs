@@ -71,22 +71,23 @@ namespace Enceladus.Api
                         {
                             return Task.FromResult(0);
                         },
-                        //OnTokenValidated = context =>
-                        //{
-                        //    try
-                        //    {
-                        //        var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
-                        //        if (claimsIdentity != null)
-                        //        {
-                        //            string name = claimsIdentity.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
-                        //        }
-                        //        return Task.FromResult(0);
-                        //    }
-                        //    catch (Exception ex)
-                        //    {
-                        //        throw ex;
-                        //    }
-                        //}
+                        OnTokenValidated = context =>
+                        {
+                            try
+                            {
+                                var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
+                                if (claimsIdentity != null)
+                                {
+                                    string name = claimsIdentity.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
+                                }
+                                context.Success();
+                                return Task.CompletedTask;
+                            }
+                            catch (Exception ex)
+                            {
+                                throw ex;
+                            }
+                        }
                     };
 
                     options.Validate();

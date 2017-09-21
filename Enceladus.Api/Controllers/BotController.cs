@@ -25,7 +25,6 @@ namespace Enceladus.Api.Controllers
         }
 
         [HttpGet("")]
-        [AllowAnonymous]
         public JsonResult GetBots()
         {
             try
