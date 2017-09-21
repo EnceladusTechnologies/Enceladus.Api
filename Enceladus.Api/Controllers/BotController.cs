@@ -27,10 +27,18 @@ namespace Enceladus.Api.Controllers
         [HttpGet("")]
         public JsonResult GetBots()
         {
-            var resp = AppValueDevCache.GetBots(UserClaimHelper.UserId(User.Identity));
-            var vms = resp.Select(k => k.ToListItemViewModel());
-            Response.StatusCode = (int)HttpStatusCode.OK;
-            return Json(vms);
+            try
+            {
+                var resp = AppValueDevCache.GetBots(UserClaimHelper.UserId(User.Identity));
+                var vms = resp.Select(k => k.ToListItemViewModel());
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return Json(vms);
+            }
+            catch(Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new Message(ex));
+            }
         }
 
         [HttpGet("{botId}/simulate")]
