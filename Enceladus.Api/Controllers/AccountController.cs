@@ -1,14 +1,9 @@
-﻿using Auth0.AuthenticationApi;
-using Auth0.AuthenticationApi.Models;
-using Auth0.ManagementApi;
-using Enceladus.Api.Data.EnceladusRepository;
+﻿using Enceladus.Api.Data.EnceladusRepository;
 using Enceladus.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
