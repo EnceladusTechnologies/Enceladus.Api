@@ -18,6 +18,7 @@ namespace Enceladus.Api.Models.Bots
         internal Func<string, DateTime?, DateTime?, Task<ICollection<PriceItem>>> _dataSource;
         internal DateTime _startDate;
         internal DateTime _endDate;
+        public abstract void Reset();
         public void RegisterInputSources(Func<string, DateTime?, DateTime?, Task<ICollection<PriceItem>>> dataSource, DateTime startDate, DateTime endDate)
         {
             this._startDate = startDate;
