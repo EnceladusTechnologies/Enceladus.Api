@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Threading.Tasks;
 
 namespace Enceladus.Api.Helpers
@@ -7,7 +8,14 @@ namespace Enceladus.Api.Helpers
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ScopeRequirement requirement)
         {
-            context.Succeed(requirement);
+            try
+            {
+                context.Succeed(requirement);
+            }
+            catch (Exception ex)
+            {
+                context.Fail();
+            }
             return Task.CompletedTask;
         }
     }
@@ -15,6 +23,6 @@ namespace Enceladus.Api.Helpers
     internal class ScopeRequirement : IAuthorizationRequirement
     {
         public ScopeRequirement() { }
-        
+
     }
 }
