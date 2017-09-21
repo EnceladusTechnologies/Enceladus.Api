@@ -80,8 +80,7 @@ namespace Enceladus.Api
                                 {
                                     string name = claimsIdentity.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
                                 }
-                                context.Success();
-                                return Task.CompletedTask;
+                                return Task.FromResult(0);
                             }
                             catch (Exception ex)
                             {
