@@ -42,7 +42,22 @@ namespace Enceladus.Api.Helpers
                     Author = "Joe Jordan",
                     OrderAmount = 1,
                     OrderType = OrderType.MarketOrder,
-                    StartDate = DateTime.UtcNow.Date.AddDays(-60),
+                    StartDate = DateTime.UtcNow.Date.AddDays(-365),
+                    TrailingStopExit = new TrailingStopExit()
+                    {
+                        Id = 88,
+                        Amount = 5
+                    },
+                    TakeProfitExit = new TakeProfitExit()
+                    {
+                        Id = 32,
+                        Amount = 3
+                    },
+                    InitialStopExit = new InitialStopExit()
+                    {
+                        Id = 82,
+                        Amount = 1
+                    },
                     TargetTicker = new TargetTicker()
                     {
                         TickerSymbol = "AAPL",
@@ -66,15 +81,15 @@ namespace Enceladus.Api.Helpers
                 new BotModel()
                 {
                     Id = 2,
-                    Name = "Sell and Hold Bot",
-                    Description = "A test bot to implement the sell and hold strategy",
+                    Name = "Random Signal Bot",
+                    Description = "A bot using a model which creates a random Buy / Sell / Hold signal",
                     Author = "Joe Jordan",
                     OrderAmount = 1,
                     OrderType = OrderType.MarketOrder,
-                    StartDate = DateTime.UtcNow.Date.AddDays(-60),
+                    StartDate = DateTime.UtcNow.Date.AddDays(-365),
                     TargetTicker = new TargetTicker()
                     {
-                        TickerSymbol = "MSFT",
+                        TickerSymbol = "IBM",
                         ExchangeSymbol = "NASDAQ"
                     },
                     StartingBank = 1000,
@@ -85,7 +100,7 @@ namespace Enceladus.Api.Helpers
                             new TradingModelInput()
                             {
                                 Id = 1,
-                                TickerSymbol = "MSFT",
+                                TickerSymbol = "IBM",
                                 ExchangeSymbol = "NASDAQ",
                                 IntervalType = IntervalType.Daily
                             }

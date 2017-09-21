@@ -58,7 +58,6 @@ namespace Enceladus.Api.Models.Prices.Intrinio
         public float Adj_Low { get; set; }
         public float Adj_Close { get; set; }
         public long Adj_Volume { get; set; }
-
     }
 
     public static class IntrinioService

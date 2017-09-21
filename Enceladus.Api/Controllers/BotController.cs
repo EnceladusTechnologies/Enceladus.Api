@@ -41,11 +41,11 @@ namespace Enceladus.Api.Controllers
                 if (ModelState.IsValid)
                 {
                     var bot = AppValueDevCache.GetBots(UserClaimHelper.UserId(User.Identity))
-                                            .FirstOrDefault(k=>k.Id == botId);
-
-                   var tradeBook = await BotSimulator.Simulate(bot);
+                                            .FirstOrDefault(k => k.Id == botId);
+                    var simulator = new BotSimulator();
+                    bot = await simulator.Simulate(bot);
                     Response.StatusCode = (int)HttpStatusCode.OK;
-                    return Json(tradeBook);
+                    return Json(bot.ToViewModel());
                 }
                 else
                 {
@@ -58,8 +58,6 @@ namespace Enceladus.Api.Controllers
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(new Message(ex));
             }
-            Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            return Json(new Message(MessageType.Error, "Unable to complete request"));
         }
     }
 }

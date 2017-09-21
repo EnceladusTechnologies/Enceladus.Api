@@ -13,7 +13,10 @@ namespace Enceladus.Api.Models.Bots
         public override string Name => "Buy & Hold";
         public override string Description => "Simple model for a buy and hold strategy";
         public override string Author => "Joe Jordan";
+        public override void Reset()
+        {
 
+        }
         public override ICollection<ConfigBase> ConfigurationQuestions => new List<ConfigBase>() {
             new Number()
             {
@@ -86,9 +89,14 @@ namespace Enceladus.Api.Models.Bots
     public class SellAndHoldModel : ITradingModel
     {
         public override int Id => 2;
-        public override string Name => "Sell & Hold";
-        public override string Description => "Simple model for a sell and hold strategy";
+        public override string Name => "Random Signal Model";
+        public override string Description => "A model which generates a random Buy / Sell / Hold signal";
         public override string Author => "Joe Jordan";
+        public override void Reset()
+        {
+            _signalCount = 0;
+            _currentSignal = Signal.Hold;
+        }
         private Dictionary<string, List<PriceItem>> Data;
         public override ICollection<ConfigBase> ConfigurationQuestions => new List<ConfigBase>() {
             new Number()
@@ -140,12 +148,16 @@ namespace Enceladus.Api.Models.Bots
             }
         };
 
+        private int _signalCount;
+        public Signal _currentSignal { get; set; }
+        private Random rand;
         public override async Task<(Signal Signal, double Multiplier)> GetSignal(DateTime currentDateTime)
         {
             // if this is first run then get data needed for the model
             // and process it accordingly
             if (Data == null)
             {
+                rand = new Random(DateTime.Now.Millisecond);
                 Data = new Dictionary<string, List<PriceItem>>(this.TradingModelInputs.Count);
                 foreach (var input in this.TradingModelInputs)
                 {
@@ -153,7 +165,13 @@ namespace Enceladus.Api.Models.Bots
                     Data.Add(input.TickerSymbol, d.ToList());
                 }
             }
-            return (Signal.Sell, 1.0);
+            _signalCount++;
+            if (_signalCount % 5 == 0)
+            {
+                var rn = rand.Next(-1, 2);
+                _currentSignal = (Signal)rn;
+            }
+            return (_currentSignal, 1.0);
         }
     }
 }
