@@ -45,7 +45,14 @@ namespace Enceladus.Api.Helpers
             var stopDate = DateTime.UtcNow;
             var idxDateString = idxDate.ToString("yyyyMMddHHmmss");
             // Take the first time step and use it to setup initial portfolio
-            var currPrice = priceLookup[idxDateString];
+
+            NormalizedPriceItem currPrice;
+            while (!priceLookup.ContainsKey(idxDateString))
+            {
+                idxDate = idxDate.AddDays(1);
+                idxDateString = idxDate.ToString("yyyyMMddHHmmss");
+            }
+            currPrice = priceLookup[idxDateString];
             var prevItem = new SeriesItem()
             {
                 Signal = Signal.Hold,
