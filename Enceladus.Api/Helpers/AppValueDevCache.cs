@@ -3,8 +3,6 @@ using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Enceladus.Api.Helpers
 {
@@ -30,7 +28,22 @@ namespace Enceladus.Api.Helpers
                 return items;
             }
         }
-
+        internal static ICollection<ITradingModel> GetModels()
+        {
+            var key = "models";
+            var x = memCache.Get(key);
+            if (x != null)
+            {
+                return (ICollection<ITradingModel>)x;
+            }
+            else
+            {
+                ICollection<ITradingModel> items;
+                items = GetBotsInMemory().Select(k => k.Model).Distinct().ToList();
+                memCache.Set(key, items, DateTime.Now.AddMinutes(CacheLifetimeMins));
+                return items;
+            }
+        }
         private static ICollection<BotModel> GetBotsInMemory()
         {
             return new List<BotModel>() {
@@ -41,7 +54,7 @@ namespace Enceladus.Api.Helpers
                     Description = "A test bot to implement the buy and hold strategy",
                     Author = "Joe Jordan",
                     OrderAmount = 1,
-                    OrderType = OrderType.MarketOrder,
+                    OrderType = OrderType.ModelDeferred,
                     StartDate = DateTime.UtcNow.Date.AddDays(-365),
                     TrailingStopExit = new TrailingStopExit()
                     {
@@ -85,7 +98,7 @@ namespace Enceladus.Api.Helpers
                     Description = "A bot using a model which creates a random Buy / Sell / Hold signal",
                     Author = "Joe Jordan",
                     OrderAmount = 1,
-                    OrderType = OrderType.MarketOrder,
+                    OrderType = OrderType.ModelDeferred,
                     StartDate = DateTime.UtcNow.Date.AddDays(-365),
                     TargetTicker = new TargetTicker()
                     {
@@ -93,7 +106,7 @@ namespace Enceladus.Api.Helpers
                         ExchangeSymbol = "NASDAQ"
                     },
                     StartingBank = 1000,
-                    Model = new SellAndHoldModel()
+                    Model = new RandomSignalModel()
                     {
                         TradingModelInputs = new List<TradingModelInput>()
                         {

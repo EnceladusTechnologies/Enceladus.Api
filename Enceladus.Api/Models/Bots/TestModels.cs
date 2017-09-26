@@ -10,7 +10,7 @@ namespace Enceladus.Api.Models.Bots
     public class BuyAndHoldModel : ITradingModel
     {
         public override int Id => 1;
-        public override string Name => "Buy & Hold";
+        public override string Name => "Buy & Hold Model";
         public override string Description => "Simple model for a buy and hold strategy";
         public override string Author => "Joe Jordan";
         public override void Reset()
@@ -86,7 +86,7 @@ namespace Enceladus.Api.Models.Bots
             return (Signal.Buy, 1.0);
         }
     }
-    public class SellAndHoldModel : ITradingModel
+    public class RandomSignalModel : ITradingModel
     {
         public override int Id => 2;
         public override string Name => "Random Signal Model";
@@ -105,7 +105,8 @@ namespace Enceladus.Api.Models.Bots
                 Label = "Test Number",
                 Value = "300",
                 Order = 1,
-                Required = false
+                Required = true,
+                HelpText = "This is a helpful note about what this value is for."
             },
             new Dropdown()
             {
@@ -113,7 +114,7 @@ namespace Enceladus.Api.Models.Bots
                 Label = "Test Number",
                 Value = null,
                 Order = 2,
-                Required = true,
+                Required = false,
                 Options = new List<ControlOption>()
                 {
                     new ControlOption()

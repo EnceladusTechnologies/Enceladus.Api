@@ -1,10 +1,22 @@
 ﻿using Enceladus.Api.Models.Prices.Intrinio;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Enceladus.Api.Models.Bots
 {
+    public class TradingModelViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Author { get; set; }
+        public string TradingModelInputs { get; set; }
+        public ICollection<ConfigBase> ConfigurationQuestions { get; set; }
+
+    }
+
     public abstract class ITradingModel
     {
         public abstract int Id { get; }
@@ -25,6 +37,31 @@ namespace Enceladus.Api.Models.Bots
             this._endDate = endDate;
             this._dataSource = dataSource;
         }
+        public TradingModelViewModel ToViewModel()
+        {
+            var vm = new TradingModelViewModel()
+            {
+                Id = this.Id,
+                Name = this.Name,
+                Author = this.Author,
+                Description = this.Description,
+                TradingModelInputs = string.Join(", ", this.TradingModelInputs.Select(k => k.TickerSymbol + " (" + k.IntervalType.ToString() + ")")),
+                ConfigurationQuestions = this.ConfigurationQuestions
+            };
+            return vm;
+        }
+        public ModelListItemViewModel ToListItemViewModel()
+        {
+            var vm = new ModelListItemViewModel()
+            {
+                Id = this.Id,
+                Name = this.Name,
+                Author = this.Author,
+                Description = this.Description,
+                ModelInputs = string.Join(", ", this.TradingModelInputs.Select(k => k.TickerSymbol))
+            };
+            return vm;
+        }
     }
     public enum Signal
     {
@@ -41,7 +78,14 @@ namespace Enceladus.Api.Models.Bots
 
     }
 
-
+    public class ModelListItemViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Author { get; set; }
+        public string ModelInputs { get; set; }
+    }
     public enum IntervalType
     {
         OneMinute = 1,

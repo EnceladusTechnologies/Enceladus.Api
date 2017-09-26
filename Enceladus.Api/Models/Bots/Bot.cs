@@ -50,6 +50,7 @@ namespace Enceladus.Api.Models.Bots
                 StartingBank = this.StartingBank,
                 PriceSlippagePct = this.PriceSlippagePct,
                 CommissionPenaltyPerTrade = this.CommissionPenaltyPerTrade,
+                Model = this.Model.ToViewModel(),
                 ModelAuthor = this.Model.Author,
                 ModelDescription = this.Model.Description,
                 ModelName = this.Model.Name,
@@ -67,9 +68,11 @@ namespace Enceladus.Api.Models.Bots
                 Name = this.Name,
                 Author = this.Author,
                 Description = this.Description,
+
                 ModelName = this.Model.Name,
                 OrderAmount = this.OrderAmount,
 
+                TargetSymbol = this.TargetTicker.TickerSymbol,
                 OrderType = this.OrderType.ToString(),
                 ModelInputs = string.Join(", ", this.Model.TradingModelInputs.Select(k => k.TickerSymbol))
             };
@@ -85,11 +88,13 @@ namespace Enceladus.Api.Models.Bots
         public string Author { get; set; }
         public string OrderType { get; set; }
         public double OrderAmount { get; set; }
+        public string TargetSymbol { get; set; }
         public string ModelInputs { get; set; }
     }
     public class BotResultViewModel
     {
         public int Id { get; set; }
+        public TradingModelViewModel Model { get; set; }
         public string ModelName { get; set; }
         public string ModelDescription { get; set; }
         public string ModelAuthor { get; set; }
@@ -202,6 +207,7 @@ namespace Enceladus.Api.Models.Bots
         TrailingStopLossPct = 4,
         TrailingStopLossAmt = 5,
         TrailingStopLimitPct = 6,
-        TrailingStopLimitAmt = 7
+        TrailingStopLimitAmt = 7,
+        ModelDeferred = 8
     }
 }
