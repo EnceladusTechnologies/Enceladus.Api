@@ -19,8 +19,9 @@ namespace Enceladus.Api.Models.Bots
 
     public enum ConfigBaseControlType
     {
-        Dropdown,
-        Number,
-        Checkbox
+        Dropdown = 1,
+        Number = 2,
+        Percentage = 3,
+        Checkbox = 4
     }
 }

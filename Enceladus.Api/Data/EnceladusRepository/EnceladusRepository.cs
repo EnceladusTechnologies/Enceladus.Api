@@ -1,7 +1,9 @@
 ﻿using Enceladus.Api.Helpers;
 using Enceladus.Api.Models;
+using Enceladus.Api.Models.Bots;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
@@ -48,6 +50,28 @@ namespace Enceladus.Api.Data.EnceladusRepository
         public AppUser GetAppUserByEmail(string email)
         {
             return _context.AppUsers.Where(k => k.Email == email).FirstOrDefault();
+        }
+
+        public ICollection<BotModel> GetBots(string userId)
+        {
+            return AppValueDevCache.GetBots(userId);
+        }
+
+        public ICollection<ITradingModel> GetModels()
+        {
+            return AppValueDevCache.GetModels();
+        }
+
+        public BotModel GetBot(int botId)
+        {
+            var models = AppValueDevCache.GetBots("0");
+            return models.FirstOrDefault(k => k.Id == botId);
+        }
+
+        public ICollection<ConfigBase> GetModelConfigs(int modelId)
+        {
+            var model = AppValueDevCache.GetModels().FirstOrDefault(k => k.Id == modelId);
+            return model.ConfigurationQuestions;
         }
     }
 }

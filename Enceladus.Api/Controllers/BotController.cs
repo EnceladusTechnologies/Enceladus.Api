@@ -29,7 +29,7 @@ namespace Enceladus.Api.Controllers
         {
             try
             {
-                var resp = AppValueDevCache.GetBots(UserClaimHelper.UserId(User.Identity));
+                var resp = _repository.GetBots(UserClaimHelper.UserId(User.Identity));
                 var vms = resp.Select(k => k.ToListItemViewModel());
                 Response.StatusCode = (int)HttpStatusCode.OK;
                 return Json(vms);
@@ -40,7 +40,21 @@ namespace Enceladus.Api.Controllers
                 return Json(new Message(ex));
             }
         }
-
+        [HttpGet("{botId}")]
+        public JsonResult GetBot(int botId)
+        {
+            try
+            {
+                var resp = _repository.GetBot(botId);
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return Json(resp?.ToViewModel());
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new Message(ex));
+            }
+        }
         [HttpGet("{botId}/simulate")]
         public async Task<JsonResult> SimulateBot(int botId)
         {
